@@ -94,3 +94,23 @@ def test_extract_corners_handles_missing_optional_fields():
 
     assert corner["recipient"] is None
     assert bool(corner["off_camera"]) is False
+
+
+def test_save_corners_csv_creates_a_reusable_csv(tmp_path):
+    """The processed table is saved without a pandas index column."""
+    module = importlib.import_module("replay_corner_analyzer.extract_corners")
+    corners = pd.DataFrame(
+        [
+            {
+                "match_id": 3895158,
+                "event_id": "corner-1",
+                "team": "Bayer Leverkusen",
+            }
+        ]
+    )
+    output_path = tmp_path / "processed" / "corners.csv"
+
+    saved_path = module.save_corners_csv(corners, output_path)
+
+    assert saved_path == output_path
+    pd.testing.assert_frame_equal(pd.read_csv(saved_path), corners)

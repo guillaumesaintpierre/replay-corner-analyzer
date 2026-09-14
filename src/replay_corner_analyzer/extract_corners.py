@@ -1,5 +1,7 @@
 """Extract corner kicks from StatsBomb event data."""
 
+from pathlib import Path
+
 import pandas as pd
 
 
@@ -43,3 +45,14 @@ def extract_corners(events: list[dict], match_id: int) -> pd.DataFrame:
         )
 
     return pd.DataFrame(rows)
+
+
+def save_corners_csv(
+    corners: pd.DataFrame,
+    output_path: Path | str = Path("data/processed/corners.csv"),
+) -> Path:
+    """Save a corner table as CSV and return its path."""
+    destination = Path(output_path)
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    corners.to_csv(destination, index=False)
+    return destination
