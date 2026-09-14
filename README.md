@@ -35,7 +35,7 @@ Work in progress. The project is being built incrementally from a minimal determ
 
 ## Data source
 
-The project will use [StatsBomb Open Data](https://github.com/statsbomb/open-data). Data files remain subject to StatsBomb's terms and attribution requirements.
+The project will use [StatsBomb Open Data](https://github.com/hudl/open-data). Data files remain subject to StatsBomb's terms and attribution requirements.
 
 ## License
 
