@@ -34,6 +34,8 @@ def test_add_target_zone_classifies_short_corner():
 
     assert result.loc[0, "target_zone"] == "short_corner"
 
+
+
 def test_add_target_zone_classifies_central_box():
     corners = pd.DataFrame(
         {
