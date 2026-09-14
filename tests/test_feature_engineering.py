@@ -33,3 +33,20 @@ def test_add_target_zone_classifies_short_corner():
     result = fe.add_target_zone(corners)
 
     assert result.loc[0, "target_zone"] == "short_corner"
+
+def test_add_target_zone_classifies_central_box():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [40.0],
+            "side": ["left"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["central_box"]
