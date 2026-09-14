@@ -1,1 +1,4 @@
-# Dependencies will be added as each project component is implemented.
+numpy>=1.26,<3.0
+pandas>=2.2,<4.0
+pytest>=8.0,<10.0
+requests>=2.31,<3.0
