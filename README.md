@@ -53,10 +53,10 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-Prepare the example Borussia Dortmund–Bayer Leverkusen match from 21 April 2024:
+Prepare the example Bayer Leverkusen–Borussia Dortmund match from 3 December 2023:
 
 ```bash
-PYTHONPATH=src python -m replay_corner_analyzer.prepare_data 3895309
+PYTHONPATH=src python -m replay_corner_analyzer.prepare_data 3895158
 ```
 
 This downloads the event JSON into `data/raw/` and writes the query-ready table to `data/processed/corners.csv`.
