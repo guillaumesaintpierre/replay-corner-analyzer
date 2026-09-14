@@ -17,10 +17,6 @@ def test_add_corner_side_labels_both_sides_of_the_pitch():
 
     assert featured["side"].tolist() == ["left", "right"]
 
-import pandas as pd
-from replay_corner_analyzer import feature_engineering as fe
-
-
 def test_add_target_zone_classifies_short_corner():
     corners = pd.DataFrame(
         {
@@ -30,11 +26,13 @@ def test_add_target_zone_classifies_short_corner():
         }
     )
 
-    result = fe.add_target_zone(corners)
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
 
-    assert result.loc[0, "target_zone"] == "short_corner"
+    featured = module.add_target_zone(corners)
 
-
+    assert featured["target_zone"].tolist() == ["short_corner"]
 
 def test_add_target_zone_classifies_central_box():
     corners = pd.DataFrame(
@@ -42,6 +40,109 @@ def test_add_target_zone_classifies_central_box():
             "pass_length": [30.0],
             "end_y": [40.0],
             "side": ["left"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["central_box"]
+
+def test_add_target_zone_classifies_near_post_from_left_corner():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [20.0],
+            "side": ["left"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["near_post"]
+
+def test_add_target_zone_classifies_near_post_from_right_corner():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [60.0],
+            "side": ["right"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["near_post"]
+
+def test_add_target_zone_classifies_far_post_from_left_corner():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [60.0],
+            "side": ["left"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["far_post"]
+
+def test_add_target_zone_classifies_far_post_from_right_corner():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [20.0],
+            "side": ["right"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["far_post"]
+
+def test_add_target_zone_includes_lower_central_box_boundary():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [34.0],
+            "side": ["left"],
+        }
+    )
+
+    module = importlib.import_module(
+        "replay_corner_analyzer.feature_engineering"
+    )
+
+    featured = module.add_target_zone(corners)
+
+    assert featured["target_zone"].tolist() == ["central_box"]
+
+
+def test_add_target_zone_includes_upper_central_box_boundary():
+    corners = pd.DataFrame(
+        {
+            "pass_length": [30.0],
+            "end_y": [46.0],
+            "side": ["right"],
         }
     )
 
