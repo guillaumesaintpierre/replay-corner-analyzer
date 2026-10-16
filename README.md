@@ -1,5 +1,9 @@
 # REPLAY Corner Analyzer
 
+> **Independent personal project.**  
+> This repository is not part of the EPFL AI Team REPLAY codebase. It is a separate football analytics demo built with public StatsBomb Open Data to explore tactical feature extraction, structured querying and match-situation retrieval.
+
+
 A deterministic football-analysis MVP that converts StatsBomb event data into searchable corner-kick situations and optional video clips.
 
 The project demonstrates the core REPLAY workflow without a large language model: a user writes a simple French or English request, the parser converts it into explicit filters, and the system returns the matching corners with their tactical context and outcome.
